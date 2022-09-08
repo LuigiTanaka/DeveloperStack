@@ -6,6 +6,11 @@ export async function insert(questionData: TypeQuestionData) {
     await prisma.questions.create({ data: questionData })
 }
 
+export async function getQuestionById(id: number) {
+    const question = await prisma.questions.findUnique({ where: { id } });
+    return question;
+}
+
 export async function getQuestions() {
     const questions = await prisma.questions.findMany();
     return questions;
@@ -28,6 +33,6 @@ export async function getQuestionWithAnswers(id: number) {
             },
         },
      });
-     
+
      return questionWithAnswers;
 }
